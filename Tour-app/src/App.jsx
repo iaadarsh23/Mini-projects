@@ -9,6 +9,19 @@ function App() {
 		const newTour = city.filter((city) => city.id !== id);
 		setCity(newTour);
 	}
+	if (city.length == 0) {
+		return (
+			<div className="flex flex-col items-center justify-center min-h-screen">
+				<h1 className="text-4xl font-bold text-gray-800 mb-4">No tour left</h1>
+				<button
+					onClick={() => setCity(tours)}
+					className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition duration-300"
+				>
+					Refresh
+				</button>
+			</div>
+		);
+	}
 
 	return (
 		<div className="container mx-auto px-4 py-8 ">

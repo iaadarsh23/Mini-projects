@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const Card = ({ id, name, image, price, info, delTour }) => {
 	const [readMore, setReadMore] = useState(false);
-	const description = `${info.substring(0, 100)}...`;
+	const description = readMore ? info : `${info.substring(0, 100)}...`;
 
 	function handleRead() {
 		setReadMore(!readMore);
@@ -29,7 +29,10 @@ const Card = ({ id, name, image, price, info, delTour }) => {
 						className="text-gray-600 text-base cursor-pointer"
 						onClick={handleRead}
 					>
-						{description} {readMore ? "show less " : "read more"}
+						{description}
+						<span className="text-blue-500 font-medium">
+							{readMore ? " show less " : " read more"}
+						</span>
 					</span>
 					<button className="border-2 text-red-400" onClick={deleteCard}>
 						Not interested
