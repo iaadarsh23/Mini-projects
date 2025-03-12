@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 
-const Card = ({ name, image, price, info }) => {
+const Card = ({ id, name, image, price, info, delTour }) => {
+	const [readMore, setReadMore] = useState(false);
+	const description = `${info.substring(0, 100)}...`;
+
+	function handleRead() {
+		setReadMore(!readMore);
+	}
+	function deleteCard() {
+		delTour(id);
+	}
 	return (
-		<div className="w-full rounded-lg overflow-hidden shadow-lg bg-white transition-transform hover:scale-105">
+		<div className="w-full rounded-lg overflow-hidden shadow-lg bg-white transition-transform hover:scale-105 flex flex-col">
 			<div className="relative h-48">
 				<img
 					src={image}
@@ -15,7 +24,17 @@ const Card = ({ name, image, price, info }) => {
 					<p className="text-green-600 font-bold text-xl">${price}</p>
 					<h2 className="text-gray-800 font-bold text-xl">{name}</h2>
 				</div>
-				<p className="text-gray-600 text-base">{info}</p>
+				<div className="flex flex-col gap-3">
+					<span
+						className="text-gray-600 text-base cursor-pointer"
+						onClick={handleRead}
+					>
+						{description} {readMore ? "show less " : "read more"}
+					</span>
+					<button className="border-2 text-red-400" onClick={deleteCard}>
+						Not interested
+					</button>
+				</div>
 			</div>
 		</div>
 	);
